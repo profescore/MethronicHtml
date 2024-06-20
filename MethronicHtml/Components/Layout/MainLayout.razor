@@ -1,0 +1,87 @@
+﻿@inherits LayoutComponentBase
+
+
+<!--begin::App-->
+<div class="d-flex flex-column flex-root app-root" id="kt_app_root">
+    <!--begin::Page-->
+    <div class="app-page  flex-column flex-column-fluid " id="kt_app_page">
+        <MethronicHtml.layout.partials._header />
+        <!--begin::Wrapper-->
+        <div class="app-wrapper  flex-column flex-row-fluid " id="kt_app_wrapper">
+            <MethronicHtml.layout.partials._sidebar />
+            <!--begin::Main-->
+            <div class="app-main flex-column flex-row-fluid " id="kt_app_main">
+                <!--begin::Content wrapper-->
+                <div class="d-flex flex-column flex-column-fluid">
+                    <MethronicHtml.layout.partials._toolbar />
+                    <!--begin::Content-->
+                    <div id="kt_app_content" class="app-content  flex-column-fluid ">
+                        <!--begin::Content container-->
+                        <div id="kt_app_content_container" class="app-container  container-fluid ">
+                            @Body
+                        </div>
+                        <!--end::Content container-->
+                    </div>
+                    <!--end::Content-->
+                </div>
+                <!--end::Content wrapper-->
+                <MethronicHtml.layout.partials._footer />
+            </div>
+            <!--end:::Main-->
+        </div>
+        <!--end::Wrapper-->
+    </div>
+    <!--end::Page-->
+</div>
+<!--end::App-->
+<MethronicHtml.partials._drawers />
+
+
+<div id="blazor-error-ui">
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+</div>
+
+@code{
+
+    [Inject]
+    public IJSRuntime JS{ get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JS.InvokeVoidAsync("KTApp.init");
+        await JS.InvokeVoidAsync("KTAppSidebar.init");
+        await JS.InvokeVoidAsync("KTThemeMode.init");
+        await JS.InvokeVoidAsync("KTLayoutToolbar.init");
+        await JS.InvokeVoidAsync("KTDrawer.init");
+        await JS.InvokeVoidAsync("KTMenu.init");
+        await JS.InvokeVoidAsync("KTScroll.init");
+        await JS.InvokeVoidAsync("KTSticky.init");
+        await JS.InvokeVoidAsync("KTSwapper.init");
+        await JS.InvokeVoidAsync("KTToggle.init");
+        await JS.InvokeVoidAsync("KTScrolltop.init");
+        await JS.InvokeVoidAsync("KTDialer.init");
+        await JS.InvokeVoidAsync("KTImageInput.init");
+        await JS.InvokeVoidAsync("KTPasswordMeter.init");
+        await JS.InvokeVoidAsync("KTAppLayoutBuilder.init");
+        await JS.InvokeVoidAsync("KTComponents.init");
+   }
+}
+@* 
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div> *@
+
